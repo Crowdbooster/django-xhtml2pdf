@@ -42,6 +42,8 @@ def generate_pdf_template_object(template_object, file_object, context):
     Inner function to pass template objects directly instead of passing a filename
     """
     html = template_object.render(Context(context))
+    if not file_object:
+        file_object = StringIO.StringIO()
     pisa.CreatePDF(html.encode("UTF-8"), file_object , encoding='UTF-8',
                    link_callback=fetch_resources)
     return file_object
